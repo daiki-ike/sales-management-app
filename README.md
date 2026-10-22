@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# 売上管理アプリ
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Reactの静的アプリです。部門・個人CSVの取込、合計、順位、グラフ、CSV出力に対応します。
 
-## Available Scripts
+## ローカル起動
 
-In the project directory, you can run:
+Node.js 24 LTS（24.15以上）、または22 LTS（22.22.2以上）を使用します。
 
-### `npm start`
+```powershell
+npm ci
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+http://127.0.0.1:3000 を開きます。CSVはブラウザーで処理します。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 検証とビルド
 
-### `npm test`
+```powershell
+npm test
+npm run build
+npm run preview
+npm audit
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`npm test`はCSV取込・集計・順位・詳細表示の回帰テストを実行します。
+`npm run test:watch`で継続実行できます。ビルド出力先は従来どおり`build/`です。
 
-### `npm run build`
+## Vercel
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`vercel.json`でVite、`npm ci`、`npm run build`、出力`build`を指定しています。
+本番反映前にVercelのNodeバージョンが上記条件を満たすことを確認してください。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 2026-10-22の依存脆弱性対策
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+保守終了したCreate React Appの`react-scripts`をViteへ置き換えました。
+JSXの入口・アプリ・テストを`.jsx`に変更し、HTMLをルートへ移しました。
+集計・CSV・ランキング処理のコードと初期データは変更していません。
+テストは初期テンプレート用Jestテストから、実際の機能を確認するVitestへ移行しています。
+外部Tailwind CDNの読込みは従来構成を維持しています。npm監査はCDNや独自実装の安全性を保証しません。
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`README.old.md`は旧構成の資料です。現在の実行手順はこのファイルを使ってください。
